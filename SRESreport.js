@@ -207,7 +207,7 @@ requirejs(
         'src' : 'u.id'
       }, {
         'name' : 'UoA Username',
-        'src' : 'u.sis_login_id',
+        'src' : 'u.login_id',
         'sis' : true
       }, {
         'name' : 'Display Name',
@@ -263,8 +263,8 @@ requirejs(
         'name' : 'Context ID',
         'src' : 'a.context_id'
       }, {
-        'name' : 'Login ID',
-        'src' : 'u.login_id'
+        'name' : 'SIS Login ID',
+        'src' : 'u.sis_login_id'
       }, {
         'name' : 'Section',
         'src' : 'u.section_name',
