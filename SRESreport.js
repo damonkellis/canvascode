@@ -3,7 +3,7 @@
 // @namespace   https://
 // @description Generates a .CSV download of the class list and access report for all students
 // @include     https://canvas.auckland.ac.nz/courses/*/users
-// @version     2
+// @version     2.1
 // @grant       none
 // ==/UserScript==
 requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], function () {
@@ -17,6 +17,17 @@ requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], f
   var needsFetched = 0;
   var reporttype;
   var ajaxPool;
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1;
+  var yyyy = today.getFullYear();
+  if (dd < 10) {
+    dd = '0' + dd;
+  }
+  if (mm < 10) {
+    mm = '0' + mm;
+  }
+  var today = dd + '-' + mm + '-' + yyyy;
   var aborted = false;
   addAccessReportButton();
   function addAccessReportButton() {
@@ -84,7 +95,7 @@ requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], f
     }
     return url;
   }
-  function getStudents(courseId, url) {  //cycles through the student list
+  function getStudents(courseId, url) { //cycles through the student list
     try {
       if (aborted) {
         throw new Error('Aborted');
@@ -113,7 +124,7 @@ requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], f
         }
         pending--;
         if (pending <= 0) {
-          if (reporttype == 0) {  //branches to get student access data
+          if (reporttype == 0) { //branches to get student access data
             getAccessReport(courseId);
           }
           if (reporttype == 1) {
@@ -128,7 +139,7 @@ requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], f
       errorHandler(e);
     }
   }
-  function getAccessReport(courseId) {  //cycles through student list
+  function getAccessReport(courseId) { //cycles through student list
     pending = 0;
     fetched = 0;
     needsFetched = Object.getOwnPropertyNames(userData).length;
@@ -139,7 +150,7 @@ requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], f
       }
     }
   }
-  function getAccesses(courseId, url) {  //gets usage data for each student individually
+  function getAccesses(courseId, url) { //gets usage data for each student individually
     try {
       if (aborted) {
         throw new Error('Aborted');
@@ -184,7 +195,7 @@ requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], f
     }
     return courseId;
   }
-  function makeReport() {  //generates CSV of data
+  function makeReport() { //generates CSV of data
     try {
       if (aborted) {
         console.log('Process aborted');
@@ -197,17 +208,6 @@ requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], f
         var blob = new Blob([csv], {
           'type': 'text/csv;charset=utf-8'
         });
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-        if (dd < 10) {
-            dd = '0' + dd;
-          }
-        if (mm < 10) {
-            mm = '0' + mm;
-          }
-        var today = dd + '-' + mm + '-' + yyyy;
         if (reporttype == 0) {
           saveAs(blob, 'SRES-access-report-' + today + '.csv');
           $('#jj_access_report').one('click', {
@@ -215,8 +215,7 @@ requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], f
           }, accessReport);
         }
         if (reporttype == 1) {
-          
-          var savename = 'SRES-student-list-' + today +'.csv';
+          var savename = 'SRES-student-list-' + today + '.csv';
           saveAs(blob, savename);
           $('#jj_student_report').one('click', {
             type: 1
@@ -276,12 +275,12 @@ requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], f
         'accessing': true
       },
       {
-        'name': 'Views',
+        'name': 'Views by ' + today,
         'src': 'a.view_score',
         'accessing': true
       },
       {
-        'name': 'Participations',
+        'name': 'Participations by ' + today,
         'src': 'a.participate_score',
         'accessing': true
       },
