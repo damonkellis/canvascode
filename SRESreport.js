@@ -1,9 +1,8 @@
-// ==UserScript==
 // @name        SRES reporter
 // @namespace   https://
 // @description Generates a .CSV download of the class list and access report for all students
 // @include     https://canvas.auckland.ac.nz/courses/*/users
-// @version     2.1
+// @version     2.2
 // @grant       none
 // ==/UserScript==
 requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], function () {
@@ -205,17 +204,18 @@ requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], f
       progressbar();
       var csv = createCSV();
       if (csv) {
+        var courseId = getCourseId();
         var blob = new Blob([csv], {
           'type': 'text/csv;charset=utf-8'
         });
         if (reporttype == 0) {
-          saveAs(blob, 'SRES-access-report-' + today + '.csv');
+          saveAs(blob, 'course-' + courseId + '-access-report-' + today + '.csv');
           $('#jj_access_report').one('click', {
             type: 0
           }, accessReport);
         }
         if (reporttype == 1) {
-          var savename = 'SRES-student-list-' + today + '.csv';
+          var savename = 'course-' + courseId + '-student-list-' + today + '.csv';
           saveAs(blob, savename);
           $('#jj_student_report').one('click', {
             type: 1
@@ -230,6 +230,10 @@ requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], f
   }
   function createCSV() {
     var fields = [
+      {
+        'name': 'Canvas User ID',
+        'src': 'u.id'
+      },
       {
         'name': 'UoA Username',
         'src': 'u.login_id',
@@ -246,10 +250,6 @@ requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], f
       {
         'name': 'Email',
         'src': 'u.email'
-      },
-      {
-        'name': 'Canvas User ID',
-        'src': 'u.id'
       },
       {
         'name': 'Display Name',
@@ -545,3 +545,4 @@ requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], f
     console.log(e.name + ': ' + e.message);
   }
 }) ();
+
