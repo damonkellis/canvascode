@@ -1,11 +1,13 @@
+// ==UserScript==
 // @name        SRES reporter
 // @namespace   https://
 // @description Generates a .CSV download of the class list and access report for all students
 // @include     https://canvas.auckland.ac.nz/courses/*/users
-// @version     2.2
+// @require     https://github.com/eligrey/FileSaver.js/raw/master/FileSaver.js
+// @version     2.3
 // @grant       none
 // ==/UserScript==
-requirejs(['https://cdn.rawgit.com/eligrey/FileSaver.js/master/FileSaver.js'], function () {
+(function () {
   'use strict';
   var userData = {
   };
