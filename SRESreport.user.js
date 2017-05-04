@@ -2,7 +2,7 @@
 // @name        SRES reporter
 // @author      Damon Ellis
 // @namespace   https://github.com/damonkellis/canvascode/
-// @description Generates a .CSV download of the class list and access report for all students
+// @description For Canvas users at the University of Auckland, this tool generates a .CSV download of the class list and access report for all students in a course
 // @downloadURL https://github.com/damonkellis/canvascode/raw/master/SRESreport.user.js
 // @include     https://canvas.auckland.ac.nz/courses/*/users
 // @require     https://github.com/eligrey/FileSaver.js/raw/master/FileSaver.js
