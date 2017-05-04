@@ -1,12 +1,15 @@
 // ==UserScript==
 // @name        SRES reporter
-// @namespace   https://
+// @namespace   https://github.com/damonkellis/canvascode/
 // @description Generates a .CSV download of the class list and access report for all students
 // @include     https://canvas.auckland.ac.nz/courses/*/users
 // @require     https://github.com/eligrey/FileSaver.js/raw/master/FileSaver.js
 // @version     2.3
 // @grant       none
 // ==/UserScript==
+
+// based on code from James Jones' Canvancement https://github.com/jamesjonesmath/canvancement
+
 (function () {
   'use strict';
   var userData = {
