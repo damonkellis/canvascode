@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name        SRES reporter
+// @author      Damon Ellis
 // @namespace   https://github.com/damonkellis/canvascode/
 // @description Generates a .CSV download of the class list and access report for all students
+// @downloadURL https://github.com/damonkellis/canvascode/raw/master/SRESreport.user.js
 // @include     https://canvas.auckland.ac.nz/courses/*/users
 // @require     https://github.com/eligrey/FileSaver.js/raw/master/FileSaver.js
-// @version     2.3
+// @version     2.4
 // @grant       none
-// @author      Damon Ellis (UoA)
 // ==/UserScript==
 
 // based on code from James Jones' Canvancement https://github.com/jamesjonesmath/canvancement
