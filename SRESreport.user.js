@@ -6,6 +6,7 @@
 // @require     https://github.com/eligrey/FileSaver.js/raw/master/FileSaver.js
 // @version     2.3
 // @grant       none
+// @author      Damon Ellis (UoA)
 // ==/UserScript==
 
 // based on code from James Jones' Canvancement https://github.com/jamesjonesmath/canvancement
