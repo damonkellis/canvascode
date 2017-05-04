@@ -6,7 +6,7 @@
 // @downloadURL https://github.com/damonkellis/canvascode/raw/master/SRESreport.user.js
 // @include     https://canvas.auckland.ac.nz/courses/*/users
 // @require     https://github.com/eligrey/FileSaver.js/raw/master/FileSaver.js
-// @version     2.4
+// @version     2.5
 // @grant       none
 // ==/UserScript==
 
